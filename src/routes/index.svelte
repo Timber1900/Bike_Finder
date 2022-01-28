@@ -2,7 +2,7 @@
 	import axios from 'axios';
 	import { onMount } from 'svelte';
 	import { curLocation } from '../stores/curLocation';
-	import { Network, NetworkClass, Station } from '../types/network';
+	import type { Network, NetworkClass, Station } from '../types/network';
 	import MdStar from 'svelte-icons/md/MdStar.svelte';
 	import MdLocationOn from 'svelte-icons/md/MdLocationOn.svelte';
 
@@ -11,7 +11,7 @@
 	$: $curLocation, run();
 
 	const run = async () => {
-		const response = await axios.get<Network>(`http://api.citybik.es/v2/networks/${$curLocation}`);
+		const response = await axios.get<Network>(`https://api.citybik.es/v2/networks/${$curLocation}`);
 		const data: Network = response.data;
 		network = data.network;
 		stations = network?.stations ?? [];

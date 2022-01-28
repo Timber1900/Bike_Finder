@@ -5,7 +5,7 @@
 	import type { Networks } from '../types/networks';
 
 	let searchTerms = '';
-	const URL = 'http://api.citybik.es/v2/networks/';
+	const URL = 'https://api.citybik.es/v2/networks/';
 
 	$: $curLocation, update();
 
