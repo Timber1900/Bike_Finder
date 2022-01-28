@@ -1,0 +1,80 @@
+{
+  ".svelte-kit/runtime/client/start.js": {
+    "file": "start-9b07cee0.js",
+    "src": ".svelte-kit/runtime/client/start.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor-0cb8730d.js"
+    ],
+    "dynamicImports": [
+      "src/routes/__layout.svelte",
+      ".svelte-kit/runtime/components/error.svelte",
+      "src/routes/index.svelte",
+      "src/routes/favorites.svelte",
+      "src/routes/settings.svelte"
+    ]
+  },
+  "src/routes/__layout.svelte": {
+    "file": "pages/__layout.svelte-2cd0d32b.js",
+    "src": "src/routes/__layout.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-0cb8730d.js",
+      "_curLocation-0ca46c2b.js"
+    ],
+    "css": [
+      "assets/pages/__layout.svelte-5dc16ed9.css"
+    ]
+  },
+  ".svelte-kit/runtime/components/error.svelte": {
+    "file": "error.svelte-69794a6c.js",
+    "src": ".svelte-kit/runtime/components/error.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-0cb8730d.js"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "pages/index.svelte-fd573c53.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-0cb8730d.js",
+      "_curLocation-0ca46c2b.js"
+    ]
+  },
+  "src/routes/favorites.svelte": {
+    "file": "pages/favorites.svelte-f4391266.js",
+    "src": "src/routes/favorites.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-0cb8730d.js"
+    ]
+  },
+  "src/routes/settings.svelte": {
+    "file": "pages/settings.svelte-38254e6e.js",
+    "src": "src/routes/settings.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-0cb8730d.js",
+      "_curLocation-0ca46c2b.js"
+    ]
+  },
+  "_vendor-0cb8730d.js": {
+    "file": "chunks/vendor-0cb8730d.js",
+    "css": [
+      "assets/vendor-86f8c920.css"
+    ]
+  },
+  "_curLocation-0ca46c2b.js": {
+    "file": "chunks/curLocation-0ca46c2b.js",
+    "imports": [
+      "_vendor-0cb8730d.js"
+    ]
+  }
+}

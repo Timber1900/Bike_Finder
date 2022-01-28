@@ -14,7 +14,7 @@
 	};
 
 	const getLocation = async () => {
-		const res = await axios.get<Networks, { data: Networks }>(URL, {});
+		const res = await axios.get<Networks>(URL, {});
 		locations.set(res.data);
 
 		locations.subscribe((val) => {

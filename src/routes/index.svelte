@@ -2,7 +2,7 @@
 	import axios from 'axios';
 	import { onMount } from 'svelte';
 	import { curLocation } from '../stores/curLocation';
-	import type { Network, NetworkClass, Station } from '../types/network';
+	import { Network, NetworkClass, Station } from '../types/network';
 	import MdStar from 'svelte-icons/md/MdStar.svelte';
 	import MdLocationOn from 'svelte-icons/md/MdLocationOn.svelte';
 
