@@ -5636,7 +5636,7 @@ var init__ = __esm({
     init_layout_svelte();
     entry = "pages/__layout.svelte-2cd0d32b.js";
     js = ["pages/__layout.svelte-2cd0d32b.js", "chunks/vendor-0cb8730d.js", "chunks/curLocation-0ca46c2b.js"];
-    css2 = ["assets/pages/__layout.svelte-5dc16ed9.css", "assets/vendor-86f8c920.css"];
+    css2 = ["assets/pages/__layout.svelte-5a326b17.css", "assets/vendor-86f8c920.css"];
   }
 });
 
@@ -8475,7 +8475,7 @@ var init_index_svelte = __esm({
       let stations = [];
       let network;
       const run2 = async () => {
-        const response = await import_axios.default.get(`http://api.citybik.es/v2/networks/${$curLocation}`);
+        const response = await import_axios.default.get(`https://api.citybik.es/v2/networks/${$curLocation}`);
         const data = response.data;
         network = data.network;
         stations = (network == null ? void 0 : network.stations) ?? [];
@@ -8516,8 +8516,8 @@ var entry3, js3, css5;
 var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     init_index_svelte();
-    entry3 = "pages/index.svelte-fd573c53.js";
-    js3 = ["pages/index.svelte-fd573c53.js", "chunks/vendor-0cb8730d.js", "chunks/curLocation-0ca46c2b.js"];
+    entry3 = "pages/index.svelte-adae2552.js";
+    js3 = ["pages/index.svelte-adae2552.js", "chunks/vendor-0cb8730d.js", "chunks/curLocation-0ca46c2b.js"];
     css5 = ["assets/vendor-86f8c920.css"];
   }
 });
@@ -8560,19 +8560,13 @@ var settings_svelte_exports = {};
 __export(settings_svelte_exports, {
   default: () => Settings
 });
-var import_axios2, locations, Name, Settings;
+var import_axios2, locations, Settings;
 var init_settings_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/settings.svelte.js"() {
     init_index_992742ef();
     init_curLocation_6a23ff97();
     import_axios2 = __toModule(require_axios2());
     locations = writable2({ networks: [] });
-    (function(Name2) {
-      Name2["DataLicenceGermanyAttributionVersion20"] = "Data licence Germany \u2013 attribution \u2013 version 2.0";
-      Name2["OGLV3License"] = "OGL v3 license";
-      Name2["OpenDataCommonsOpenDatabaseLicense10ODBL"] = "Open Data Commons Open Database License 1.0 (ODbL)";
-      Name2["OpenLicence"] = "Open Licence";
-    })(Name || (Name = {}));
     Settings = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $curLocation, $$unsubscribe_curLocation;
       let $locations, $$unsubscribe_locations;
@@ -8610,8 +8604,8 @@ var entry5, js5, css7;
 var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     init_settings_svelte();
-    entry5 = "pages/settings.svelte-38254e6e.js";
-    js5 = ["pages/settings.svelte-38254e6e.js", "chunks/vendor-0cb8730d.js", "chunks/curLocation-0ca46c2b.js"];
+    entry5 = "pages/settings.svelte-a94430fd.js";
+    js5 = ["pages/settings.svelte-a94430fd.js", "chunks/vendor-0cb8730d.js", "chunks/curLocation-0ca46c2b.js"];
     css7 = ["assets/vendor-86f8c920.css"];
   }
 });
@@ -10367,7 +10361,10 @@ var user_hooks = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module"
 });
-var template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<meta name="description" content="" />\n		<link rel="icon" href="' + assets2 + '/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		' + head + '\n	</head>\n	<body>\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n";
+var template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<meta name="description" content="" />\n		<link rel="icon" href="' + assets2 + `/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel='manifest' href='manifest.json' crossorigin="use-credentials">
+		` + head + '\n	</head>\n	<body>\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n";
 var read = null;
 set_paths({ "base": "", "assets": "" });
 var get_hooks = (hooks) => ({
@@ -10404,7 +10401,7 @@ var App = class {
       prerender: true,
       read,
       root: Root,
-      service_worker: null,
+      service_worker: base + "/service-worker.js",
       router: true,
       target: "#svelte",
       template,
@@ -10423,10 +10420,10 @@ var App = class {
 // .svelte-kit/vercel-tmp/manifest.js
 var manifest = {
   appDir: "_app",
-  assets: new Set(["favicon.png"]),
+  assets: new Set(["favicon.png", "icon-192x192.png", "icon-256x256.png", "icon-384x384.png", "icon-512x512.png", "manifest.json"]),
   _: {
-    mime: { ".png": "image/png" },
-    entry: { "file": "start-9b07cee0.js", "js": ["start-9b07cee0.js", "chunks/vendor-0cb8730d.js"], "css": ["assets/vendor-86f8c920.css"] },
+    mime: { ".png": "image/png", ".json": "application/json" },
+    entry: { "file": "start-aa511c52.js", "js": ["start-aa511c52.js", "chunks/vendor-0cb8730d.js"], "css": ["assets/vendor-86f8c920.css"] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
