@@ -18,7 +18,7 @@
 	<div
 		class="z-0 bg-gradient-to-br from-green-gradient-2a to-green-gradient-2b opacity-[56%] absolute inset-0 pointer-events-none"
 	/>
-	<div class={`h-screen z-40 ${show ? 'blur-[1px]' : ''} transition-all`}>
+	<div class={`h-screen z-40 ${show ? 'blur-[1px]' : ''} transition-all overflow-x-hidden`}>
 		<Header openFunction={() => (show = true)} />
 		<slot />
 	</div>

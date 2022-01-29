@@ -1,36 +1,88 @@
 <script lang="ts">
 	import axios from 'axios';
-	import { onMount } from 'svelte';
 	import { curLocation } from '../stores/curLocation';
 	import type { Network, NetworkClass, Station } from '../types/network';
 	import MdStar from 'svelte-icons/md/MdStar.svelte';
 	import MdLocationOn from 'svelte-icons/md/MdLocationOn.svelte';
+	import { LocationSortIndex } from '../functions/location';
+	import { slide } from 'svelte/transition';
+	import { onMount } from 'svelte';
 
 	let stations: Station[] = [];
 	let network: NetworkClass;
+	let favoriteIds = [];
 	$: $curLocation, run();
 
 	const run = async () => {
 		const response = await axios.get<Network>(`https://api.citybik.es/v2/networks/${$curLocation}`);
 		const data: Network = response.data;
-		network = data.network;
-		stations = network?.stations ?? [];
 
-		// stations.sort(val => {
-		// 	return val.
-		// })
-		stations = stations.sort(
-			(val1, val2) => parseInt(val1.name.substring(0, 3)) - parseInt(val2.name.substring(0, 3))
-		);
+		if (data) {
+			if (data.network) {
+				if (data.network.stations) {
+					network = data.network;
+					let tempStations = network?.stations ?? [];
+					console.log({ network, tempStations });
+
+					if (typeof window !== 'undefined') {
+						if (navigator.geolocation) {
+							navigator.geolocation.getCurrentPosition((loc) => {
+								tempStations.sort((a, b) => {
+									return LocationSortIndex(a, b, loc);
+								});
+								stations = [...tempStations];
+							});
+						}
+					}
+				}
+			}
+		}
 	};
 
-	onMount(run);
+	$: favoriteIds, sort();
+
+	const sort = () => {
+		console.log(favoriteIds);
+		if (typeof window !== 'undefined') {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition((loc) => {
+					stations = stations.sort((a, b) => {
+						if (favoriteIds.includes(a.id) && favoriteIds.includes(b.id)) {
+							return LocationSortIndex(a, b, loc);
+						} else if (favoriteIds.includes(a.id)) {
+							return -1;
+						} else if (favoriteIds.includes(b.id)) {
+							return 1;
+						} else {
+							return LocationSortIndex(a, b, loc);
+						}
+					});
+				});
+			}
+		}
+	};
+
+	onMount(() => {
+		function sleep(ms) {
+			return new Promise((resolve) => setTimeout(resolve, ms));
+		}
+
+		const frame = async () => {
+			run();
+			console.log('wait');
+			await sleep(30000);
+			console.log('done waiting');
+			frame();
+		};
+
+		frame();
+	});
 </script>
 
 <main class="flex justify-center items-center h-[calc(100%-6rem)] ">
 	<ul class="flex flex-col overflow-scroll h-full w-full p-4 gap-4 justify-start items-center z-40">
-		{#each stations as { empty_slots, free_bikes, timestamp, name }, i}
-			<li>
+		{#each stations as { empty_slots, free_bikes, timestamp, name, id }, i}
+			<li transition:slide>
 				<div
 					class="z-40 flex h-40 w-[364px] rounded-lg bg-gradient-to-bl from-green-gradient-1a to-green-gradient-1b shadow-sm flex-col"
 				>
@@ -41,7 +93,7 @@
 									{free_bikes}
 								</div>
 								<div class="text-xl text-white font-bold my-auto grid place-content-center grow">
-									Free
+									bike{free_bikes !== 1 ? 's' : ''}
 								</div>
 							</div>
 							<div class="gap-1 flex flex-row justify-center items-start w-full">
@@ -54,7 +106,19 @@
 							</div>
 						</div>
 						<div class="grid grid-cols-2 ml-auto mr-6">
-							<div class="square w-12 text-white">
+							<div
+								on:click={() => {
+									if (favoriteIds.includes(id)) {
+										const tempFavorites = [...favoriteIds];
+										favoriteIds = tempFavorites.filter((val) => val !== id);
+									} else {
+										favoriteIds = [...favoriteIds, id];
+									}
+								}}
+								class={`square w-12 ${
+									favoriteIds.includes(id) ? 'text-yellow-300' : 'text-white'
+								} transition-all`}
+							>
 								<MdStar />
 							</div>
 							<div class="square w-12 text-white">
